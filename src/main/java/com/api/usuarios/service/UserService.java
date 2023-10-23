@@ -1,5 +1,6 @@
 package com.api.usuarios.service;
 
+import com.api.usuarios.dto.UserDTO;
 import com.api.usuarios.model.User;
 import com.api.usuarios.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,8 @@ public class UserService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     @Transactional
-    public User saveUser(User user){
+    public User saveUser(UserDTO userDTO){
+        User user = new User(userDTO);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
