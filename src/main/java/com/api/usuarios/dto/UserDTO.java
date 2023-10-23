@@ -3,8 +3,8 @@ package com.api.usuarios.dto;
 import jakarta.validation.constraints.NotBlank;
 
 public record UserDTO(
-        @NotBlank
+        @NotBlank(message = "Login deve ser preenchido!")
         String username,
-        @NotBlank
+        @NotBlank(message = "Passaword deve ser preenchido!")
         String password) {
 }
