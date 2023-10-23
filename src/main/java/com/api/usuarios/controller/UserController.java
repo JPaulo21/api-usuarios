@@ -23,8 +23,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<Void> createUser(@RequestBody @Valid UserDTO userDto, UriComponentsBuilder ucb){
-        User user = userService.saveUser(new User(userDto));
-
+        User user = userService.saveUser(userDto);
         URI location = ucb
                 .path("users/{id}")
                 .buildAndExpand(user.getId())
