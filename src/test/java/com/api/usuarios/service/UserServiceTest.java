@@ -1,17 +1,16 @@
 package com.api.usuarios.service;
 
-import com.api.usuarios.dto.UserDTO;
+import com.api.usuarios.web.dto.UserDTO;
 import com.api.usuarios.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
-import com.api.usuarios.model.User;
+import com.api.usuarios.entity.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
