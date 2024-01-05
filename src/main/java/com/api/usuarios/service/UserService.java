@@ -1,7 +1,7 @@
 package com.api.usuarios.service;
 
-import com.api.usuarios.dto.UserDTO;
-import com.api.usuarios.model.User;
+import com.api.usuarios.web.dto.UserDTO;
+import com.api.usuarios.entity.User;
 import com.api.usuarios.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,14 +21,16 @@ public class UserService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     @Transactional
-    public User saveUser(UserDTO userDTO){
+    public User saveUser(UserDTO userDTO) {
         User user = new User(userDTO);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
-    @Override
+    @Override //Implementação da UserDetailsService, sempre que for feito autenticação, será chamado esse método
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username);
+        return userRepository.findByUsername(username).orElseThrow(
+                () -> new UsernameNotFoundException(String.format("Usuário com '%s' não encontrado.", username))
+        );
     }
 }
