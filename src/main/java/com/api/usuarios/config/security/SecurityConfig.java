@@ -22,12 +22,14 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .formLogin(form -> form.disable())
                 .httpBasic(basic -> basic.disable())
-                .sessionManagement(session ->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> request
+                       // .requestMatchers(HttpMethod.OPTIONS,"/users").permitAll()
                         .requestMatchers(HttpMethod.POST,"/users").permitAll()
+                        //.requestMatchers(HttpMethod.OPTIONS,"/auth").permitAll()
                         .requestMatchers(HttpMethod.POST,"/auth").permitAll()
                         .anyRequest().authenticated()
                 )
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();
     }
 
