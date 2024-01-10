@@ -1,5 +1,6 @@
 package com.api.usuarios.web.exception;
 
+import com.api.usuarios.exception.UsernameUniqueViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,4 +17,10 @@ public class ExceptionsHandler {
                 .toList());
     }
 
+    @ExceptionHandler(UsernameUniqueViolationException.class)
+    public ResponseEntity usernameJaCadastrado(UsernameUniqueViolationException e){
+        return ResponseEntity.unprocessableEntity()
+                .body(new Message("username",e.getMessage()));
+
+    }
 }

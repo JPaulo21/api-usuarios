@@ -1,0 +1,1 @@
+alter table users add constraint CNT_USERS_USERNAME_UNIQUE unique (username);
